@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>emCrypt</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="img/icon.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
+    <script src="libs/jQuery.js"></script>
+    <script src="libs/JSZip.js"></script>
+    <script src="js/script.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1 class="title">emCrypt</h1>
+    </header>
+    <section>
+        <div class="explain">
+            <p>Criptografe seu código em C, de forma simples e rápida.
+                <ul>
+                    <li>Este site gera um código criptografado e uma biblioteca para o código funcionar.
+                    </li>
+                    <li>Este site <strong>não</strong> é um compilador, se o código fonte estiver com erros, você não
+                        será avisado</li>
+                </ul>
+            </p>
+        </div>
+        <div class="textareas">
+            <div id="left">
+                <p class="super-text">Cole seu código na caixa de texto abaixo ou <a href="#"><label id="upload" for="uploadFile">dê
+                            upload do arquivo</label></a></p>
+                <div class="textarea-title">
+                    <p class="super-textarea">Entrada</p>
+                </div>
+                <div class="tabS" style="width: 15%;" onclick="crypt($('#input').val());">
+                    <p class="tab-text">Encriptar</p>
+                </div>
+                <textarea id="input" spellcheck="false"></textarea>
+            </div>
+            <div id="right">
+                <div class="textarea-title">
+                    <p class="super-textarea">Saída</p>
+                </div>
+                <div class="tab" style="left: 0" onclick="selectTab(2)">
+                    <p class="tab-text">main.cpp</p>
+                </div>
+                <div class="tab brightness" style="left: 15%; background-color: rgb(179, 179, 179)" onclick="selectTab(3)">
+                    <p class="tab-text">emCrypt.h</p>
+                </div>
+                <div class="tabS" onclick="preventDownload();">
+                    <p class="tab-text">Download ZIP</p>
+                </div>
+                <textarea id="output" spellcheck="false" readonly></textarea>
+            </div>
+        </div>
+    </section>
+
+    <input type="file" id="uploadFile" onclick="$(this).attr('onchange', 'fileCatch(this);');" />
+</body>
+
+</html>

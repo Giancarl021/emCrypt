@@ -11,13 +11,14 @@ function selectTab(n) {
 
 function crypt(code) {
     if (code.trim() == '') return;
+    //code.replace(/\*(.|\n)*?\*/gm, ''); REMOVER COMENTÁRIOS AQUI
     let line = code.split('\n');
     line = line.removeEmptyStrings();
     line = line.trimAll();
-
     let vars = generateVars(line.length);
     lib = generateLib(line, vars);
     main = generateCode(line, vars);
+    $('#input').val(code);
     selectTab(2);
 }
 

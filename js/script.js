@@ -108,7 +108,7 @@ Array.prototype.trimAll = function () {
     let bf = this;
     for (let i = 0; i < bf.length; i++) {
         bf[i] = bf[i].trim();
-        bf[i] = bf[i].replace(/ +(?= )/g, '');
+        // bf[i] = bf[i].replace(/ +(?= )/g, '');
     }
     return bf;
 }

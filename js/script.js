@@ -67,7 +67,7 @@ function generateCode(l, v) {
 
 function fileCatch(el) {
     let f = el.files[0];
-    if (f.type.match('text.*')) {
+    if (f.type == 'text/plain') {
         let r = new FileReader();
         r.onload = function (e) {
             $('#input').val(e.target.result);
@@ -78,8 +78,8 @@ function fileCatch(el) {
 }
 
 function download() {
-    main = main.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
-    lib = lib.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+    main = main.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    lib = lib.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     let zip = new JSZip;
     zip.file('emCrypt.h', lib);
     zip.file('main.cpp', main);

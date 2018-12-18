@@ -15,6 +15,7 @@ function crypt(code) {
     //code.replace(/\*(.|\n)*?\*/gm, ''); REMOVER COMENTÁRIOS AQUI
     let line = code.split('\n');
     line = line.removeEmptyStrings();
+    line = line.removeInlineComments();
     line = line.trimAll();
     let vars = generateVars(line.length);
     lib = generateLib(line, vars);
@@ -101,7 +102,22 @@ Array.prototype.removeEmptyStrings = function () {
             bf.splice(i, 1);
             i--;
         }
+    }
+    return bf;
+}
 
+Array.prototype.removeInlineComments = function () {
+    let bf = this,
+        buffer;
+    for (let i = 0; i < bf.length; i++) {
+        buffer = bf[i].split('//');
+        if (buffer.length > 1) {
+            if (buffer[0].trim() != '') bf[i] = buffer[0];
+            else {
+                bf.splice(i, 1);
+                i--;
+            }
+        }
     }
     return bf;
 }

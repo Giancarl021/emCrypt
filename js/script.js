@@ -1,5 +1,6 @@
 let varsCompense, tabSelected = 2;
-let main = '', lib = '';
+let main = '',
+    lib = '';
 
 function selectTab(n) {
     $('.tab:nth-child(' + tabSelected + ')').css('background-color', 'rgb(179, 179, 179)').addClass('brightness');
@@ -18,7 +19,6 @@ function crypt(code) {
     let vars = generateVars(line.length);
     lib = generateLib(line, vars);
     main = generateCode(line, vars);
-    $('#input').val(code);
     selectTab(2);
 }
 
@@ -70,6 +70,7 @@ function fileCatch(el) {
     if (f.type.match('text.*')) {
         let r = new FileReader();
         r.onload = function (e) {
+            $('#input').val(e.target.result);
             crypt(e.target.result);
         }
         r.readAsText(f, 'ISO-8859-1');
@@ -138,7 +139,7 @@ document.onkeydown = function (e) {
 }
 
 function preventDownload() {
-    if(lib == '' || main == '') return;
+    if (lib == '' || main == '') return;
     let popup = $('<div class="popup"><h1 class="title" style="top: 2%">ATENÇÃO</h1><p class="popup-text">O download do arquivo zip faz com que o código perca os acentos, para garantir que o código original não seja modificado, copie e cole os dados da caixa de texto de saída.</p><div class="popup-btn" onclick="$(this).parent().fadeOut(\'fast\'); setTimeout(() => {$(this).parent().remove()}, 500);"><p class="tab-text">Cancelar</p></div><div class="popup-confirm" onclick="download(); $(this).parent().fadeOut(\'fast\'); setTimeout(() => {$(this).parent().remove()}, 500);"><p class="tab-text">Download</p></div></div>');
     $(popup).appendTo($('body')).fadeIn('fast');
 

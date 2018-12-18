@@ -16,6 +16,7 @@ function crypt(code) {
     let line = code.split('\n');
     line = line.removeEmptyStrings();
     line = line.removeInlineComments();
+    // line = line.removeBlockComments(); Remove todo o código
     line = line.trimAll();
     let vars = generateVars(line.length);
     lib = generateLib(line, vars);
@@ -119,6 +120,32 @@ Array.prototype.removeInlineComments = function () {
             }
         }
     }
+    return bf;
+}
+
+Array.prototype.removeBlockComments = function () {
+    let bf = this,
+        st = null,
+        ed = Number.MAX_VALUE,
+        buffer;
+    for (let i = 0; i < bf.length; i++) {
+        if (st == null) {
+            if (bf[i].includes('/*')) {
+                st = i + 1;
+                buffer = bf[i].split('/*');
+                if (buffer[0].trim() != '') bf[i] = buffer[0];
+                else st = i;
+            }
+        } else {
+            if (bf[i].includes('*/')) {
+                ed = i;
+                buffer = bf[i].split('*/');
+                if (buffer[0].trim() != '') bf[i] = buffer[1];
+                else ed = i + 1;
+            }
+        }
+    }
+    bf.splice(st, ed - st);
     return bf;
 }
 

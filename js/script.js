@@ -11,7 +11,8 @@ function selectTab(n) {
 }
 
 function crypt(code) {
-    if (code.trim() == '') return;
+    code = code.trim();
+    if (code == '') return;
     code = code.replace(/(\/\*([\s\S]*?)\*\/)/gm, '');
     let line = code.split('\n');
     line = line.removeEmptyStrings();
@@ -76,6 +77,8 @@ function fileCatch(el) {
         }
         r.readAsText(f, 'ISO-8859-1');
     }
+    $('input').remove('#uploadFile');
+    $('<input type="file" id="uploadFile" onclick="$(this).attr(\'onchange\', \'fileCatch(this);\');" />').appendTo($('body'));
 }
 
 function download() {

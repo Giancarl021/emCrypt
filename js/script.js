@@ -12,7 +12,7 @@ function selectTab(n) {
 
 function crypt(code) {
     if (code.trim() == '') return;
-    //code.replace(/\*(.|\n)*?\*/gm, ''); REMOVER COMENTÁRIOS AQUI
+    code = code.replace(/(\/\*([\s\S]*?)\*\/)|(\/\/(.*)$)/gm, ''); //RETIRA A LIHA INTEIRA
     let line = code.split('\n');
     line = line.removeEmptyStrings();
     line = line.removeInlineComments();
